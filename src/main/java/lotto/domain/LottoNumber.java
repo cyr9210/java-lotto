@@ -1,19 +1,21 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber>{
 
-  public static final int START_NUMBER = 1;
-  public static final int END_NUMBER = 45;
-  public static HashMap<Integer, LottoNumber> lottoNumbersRange = new HashMap<>();
+  private static final int START_NUMBER = 1;
+  private static final int END_NUMBER = 45;
+  private static final Map<Integer, LottoNumber> LOTTO_NUMBERS_RANGE = new HashMap<>();
+  private static final Random RANDOM = new Random();
   private final int number;
 
   static {
     for (int i = START_NUMBER; i <= END_NUMBER; i++) {
-      lottoNumbersRange.put(i, new LottoNumber(i));
+      LOTTO_NUMBERS_RANGE.put(i, new LottoNumber(i));
     }
   }
 
@@ -25,7 +27,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
   }
 
   public static LottoNumber generateManual(int number) {
-    LottoNumber lottoNumber = lottoNumbersRange.get(number);
+    LottoNumber lottoNumber = LOTTO_NUMBERS_RANGE.get(number);
     if (lottoNumber == null) {
       throw new IllegalArgumentException("out of bound.");
     }
@@ -33,9 +35,8 @@ public class LottoNumber implements Comparable<LottoNumber>{
   }
 
   public static LottoNumber generateAuto() {
-    Random random = new Random();
-    int number = random.nextInt(45) + 1;
-    return lottoNumbersRange.get(number);
+    int number = RANDOM.nextInt(45) + 1;
+    return LOTTO_NUMBERS_RANGE.get(number);
   }
 
   public int getNumber() {

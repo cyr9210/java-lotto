@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoTicketCount;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.view.InputView;
@@ -13,13 +14,11 @@ public class LottoMain {
 
   public static void main(String[] args) {
     Money money = new Money(InputView.inputMoney());
-    int buyableLottoCount = money.getBuyableCount();
-    int manualTicketCount = InputView.inputManualTicketCount();
-    int autoTicketCount = buyableLottoCount - manualTicketCount;
+    LottoTicketCount lottoCount = InputView.getLottoCount(money);
 
-    Lottos lottos = buyManual(manualTicketCount);
-    lottos.addAll(lottoMachine.buyAuto(autoTicketCount));
-    ResultView.printLottosCount(manualTicketCount, autoTicketCount);
+    Lottos lottos = buyManual(lottoCount.getManualCount());
+    lottos.addAll(lottoMachine.buyAuto(lottoCount.getAutoCount()));
+    ResultView.printLottosCount(lottoCount);
     ResultView.printLottos(lottos);
 
     List<Integer> winnerNumber = InputView.inputWinnerNumber();

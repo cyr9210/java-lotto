@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Lotto {
 
-  private static final int LOTTO_COUNT = 6;
+  public static final int LOTTO_COUNT = 6;
   private Set<LottoNumber> ticket;
   private LottoResult result;
 

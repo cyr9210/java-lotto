@@ -16,7 +16,7 @@ public class LottoMachine {
 
   public Lotto generateAuto() {
     Set<LottoNumber> numbers = new HashSet<>();
-    while (numbers.size() != 6) {
+    while (numbers.size() != Lotto.LOTTO_COUNT) {
       numbers.add(LottoNumber.generateAuto());
     }
     return new Lotto(numbers);

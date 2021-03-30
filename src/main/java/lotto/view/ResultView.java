@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoTicketCount;
 import lotto.domain.Lottos;
 
 public class ResultView {
@@ -25,7 +26,7 @@ public class ResultView {
   }
 
   private static String getLottoNumberString(Lotto lotto) {
-    ArrayList<LottoNumber> list = new ArrayList<>(lotto.getTicket());
+    List<LottoNumber> list = new ArrayList<>(lotto.getTicket());
     Collections.sort(list);
     String result = joinToString(list, DELIMITER);
     return "[" + result + "]";
@@ -70,8 +71,9 @@ public class ResultView {
     }
   }
 
-  public static void printLottosCount(int manualTicketCount, int autoTicketCount) {
-    String message = String.format(BUY_COUNT_MESSAGE_FORMAT, manualTicketCount, autoTicketCount);
+  public static void printLottosCount(LottoTicketCount lottoTicketCount) {
+    String message
+        = String.format(BUY_COUNT_MESSAGE_FORMAT, lottoTicketCount.getManualCount(), lottoTicketCount.getAutoCount());
     System.out.println(message);
   }
 }

@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.LottoTicketCount;
+import lotto.domain.Money;
 
 public class InputView {
 
@@ -34,6 +36,13 @@ public class InputView {
   public static int inputBonusNumber() {
     System.out.println(INPUT_BONUS_NUMBER);
     return Integer.parseInt(scanner.nextLine());
+  }
+
+  public static LottoTicketCount getLottoCount(Money money) {
+    LottoTicketCount lottoTicketCount = new LottoTicketCount(money.getBuyableCount());
+    int manualTicketCount = inputManualTicketCount();
+    lottoTicketCount.assignManual(manualTicketCount);
+    return lottoTicketCount;
   }
 
   public static int inputManualTicketCount() {
